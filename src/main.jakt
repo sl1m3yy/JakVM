@@ -1,0 +1,18 @@
+import constants { Constants }
+import utilities { array_as_hex, compare_arrays }
+import parser { Parser }
+
+function read_file_bytes(path: String) throws -> [u8] {
+    mut file = File::open_for_reading(path)
+    return file.read_all()
+}
+
+function main(args: [String]) throws {
+    let bytes = read_file_bytes(path: args[1])
+    mut parser = Parser::create(bytes)
+
+    let magic = parser.read(length: 4)
+    if (compare_arrays(magic, Constants::java_magic_number())) {
+        println("Read correct java magic number from class file: {}", array_as_hex(magic))
+    }
+}

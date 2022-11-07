@@ -1,0 +1,15 @@
+class Parser {
+    cursor: i64 = 0
+    bytes: [u8]
+
+    public function create(anon bytes: [u8]) throws -> Parser {
+        return Parser(cursor: 0, bytes: bytes)
+    }
+
+    public function read(mut this, length: i64) throws -> [u8] {
+        let slice = this.bytes[this.cursor..length]
+        let array = slice.to_array()
+
+        return array
+    }
+}

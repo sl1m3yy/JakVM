@@ -1,0 +1,40 @@
+function array_as_hex(anon array: [u8]) throws -> String {
+    mut builder = StringBuilder::create()
+    builder.append_string("[")
+
+    for b in array {
+        builder.append_string(format("{:02X}", b))
+
+        // If this byte is the last one in the array, we don't want to
+        // append ','.
+        if (array.last().value_or(b) != b) {
+            builder.append_string(", ")
+        }
+    }
+
+    builder.append_string("]")
+    return builder.to_string()
+}
+
+function compare_arrays<T>(anon a: Array<T>, anon b: Array<T>) -> bool {
+    if (a.size() != b.size()) {
+        return false
+    }
+
+    if (a.capacity() != b.capacity()) {
+        return false
+    }
+
+    mut i: usize = 0
+    while (i < a.size()) {
+        let val_a = a[i]
+        let val_b = b[i]
+        if (val_a != val_b) {
+            return false
+        }
+
+        i++
+    }
+
+    return true
+}
