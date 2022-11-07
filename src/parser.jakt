@@ -7,9 +7,13 @@ class Parser {
     }
 
     public function read(mut this, length: i64) throws -> [u8] {
-        let slice = this.bytes[this.cursor..length]
+        let start = .cursor
+        mut end = start + length
+        
+        let slice = .bytes[start..end]
         let array = slice.to_array()
 
+        .cursor += length
         return array
     }
 }
