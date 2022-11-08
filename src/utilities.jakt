@@ -55,3 +55,17 @@ function print_error<T>(anon message: String, anon format: T) throws {
 function print_success<T>(anon message: String, anon format: T) throws {
     println(apply_color("\u001b[32;1m", to: message), format)
 }
+
+function bytes_to_i64(anon bytes: [u8]) throws -> i64 {
+    if (bytes.size() > 8) {
+        throw Error::from_errno(1)
+    }
+
+    mut value: u64 = 0
+    for b in bytes {
+        value = value << 8
+        value |= as_saturated(b)
+    }
+
+    return value
+}
