@@ -43,6 +43,7 @@ function apply_color(anon color: String, to: String) throws -> String {
     mut builder = StringBuilder::create()
     builder.append_string(color)
     builder.append_string(to)
+    builder.append_string("\033[0m") // Reset
 
     return builder.to_string()
 }
