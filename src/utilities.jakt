@@ -38,3 +38,19 @@ function compare_arrays<T>(anon a: Array<T>, anon b: Array<T>) -> bool {
 
     return true
 }
+
+function apply_color(anon color: String, to: String) throws -> String {
+    mut builder = StringBuilder::create()
+    builder.append_string(color)
+    builder.append_string(to)
+
+    return builder.to_string()
+}
+
+function print_error<T>(anon message: String, anon format: T) throws {
+    println(apply_color("\u001b[31;1m", to: message), format)
+}
+
+function print_success<T>(anon message: String, anon format: T) throws {
+    println(apply_color("\u001b[32;1m", to: message), format)
+}
