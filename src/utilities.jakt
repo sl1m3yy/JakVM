@@ -7,7 +7,7 @@ function array_as_hex(anon array: [u8]) throws -> String {
 
         // If this byte is the last one in the array, we don't want to
         // append ','.
-        if (array.last().value_or(b) != b) {
+        if array.last().value_or(b) != b {
             builder.append_string(", ")
         }
     }
@@ -17,19 +17,19 @@ function array_as_hex(anon array: [u8]) throws -> String {
 }
 
 function compare_arrays<T>(anon a: Array<T>, anon b: Array<T>) -> bool {
-    if (a.size() != b.size()) {
+    if a.size() != b.size() {
         return false
     }
 
-    if (a.capacity() != b.capacity()) {
+    if a.capacity() != b.capacity() {
         return false
     }
 
     mut i: usize = 0
-    while (i < a.size()) {
+    while i < a.size() {
         let val_a = a[i]
         let val_b = b[i]
-        if (val_a != val_b) {
+        if val_a != val_b {
             return false
         }
 
@@ -57,7 +57,7 @@ function print_success<T>(anon message: String, anon format: T) throws {
 }
 
 function bytes_to_i64(anon bytes: [u8]) throws -> i64 {
-    if (bytes.size() > 8) {
+    if bytes.size() > 8 {
         throw Error::from_errno(1)
     }
 
