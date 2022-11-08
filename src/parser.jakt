@@ -1,5 +1,5 @@
 class Parser {
-    cursor: i64 = 0
+    cursor: i64
     bytes: [u8]
 
     public function create(anon bytes: [u8]) throws -> Parser {
@@ -9,7 +9,7 @@ class Parser {
     public function read(mut this, length: i64) throws -> [u8] {
         let start = .cursor
         mut end = start + length
-        
+
         let slice = .bytes[start..end]
         let array = slice.to_array()
 

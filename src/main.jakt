@@ -1,5 +1,5 @@
 import constants { Constants }
-import utilities { print_error, print_success, array_as_hex, compare_arrays }
+import utilities { array_as_hex, compare_arrays, print_error, print_success }
 import parser { Parser }
 
 function read_file_bytes(path: String) throws -> [u8] {
