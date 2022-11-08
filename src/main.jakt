@@ -1,5 +1,5 @@
 import constants { Constants }
-import utilities { array_as_hex, compare_arrays, print_error, print_success }
+import utilities { array_as_hex, bytes_to_i64, compare_arrays, print_error, print_success }
 import parser { Parser }
 
 function read_file_bytes(path: String) throws -> [u8] {
@@ -17,5 +17,9 @@ function main(args: [String]) throws {
         return 1
     }
 
-    print_success("Successfuly parsed magic: {}", array_as_hex(magic))
+    println("Magic number: {}", array_as_hex(magic))
+
+    let minor = bytes_to_i64(parser.read(length: 2))
+    let major = bytes_to_i64(parser.read(length: 2))
+    println("Major version: {}, minor version: {}", major, minor)
 }
